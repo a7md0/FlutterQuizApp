@@ -49,7 +49,10 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 answerHandler: _answerQuestion,
               )
-            : Result(_totalScore),
+            : Result(
+                resultScore: _totalScore,
+                resetQuizHandler: _resetQuiz,
+              ),
       ),
     );
   }
@@ -61,5 +64,12 @@ class _MyAppState extends State<MyApp> {
     });
 
     print('Answer chosen');
+  }
+
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
   }
 }
