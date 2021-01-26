@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
-  var questions = [
+  final questions = const [
     {
       'questionText': 'What\'s your favorite color?',
       'answers': ['Black', 'Red', 'Green', 'White'],
@@ -32,28 +32,27 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Quiz App'),
         ),
-        body: Column(
-          children: [
-            Question(questions[_questionIndex]['questionText']),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) => Answer(
-                      answerText: answer,
-                      pressHandler: _answerQuestion,
-                    ))
-                .toList(),
-          ],
-        ),
+        body: _questionIndex < questions.length
+            ? Column(
+                children: [
+                  Question(questions[_questionIndex]['questionText']),
+                  ...(questions[_questionIndex]['answers'] as List<String>)
+                      .map((answer) => Answer(
+                            answerText: answer,
+                            pressHandler: _answerQuestion,
+                          ))
+                      .toList(),
+                ],
+              )
+            : Center(
+                child: Text('You did it!'),
+              ),
       ),
     );
   }
 
   void _answerQuestion() {
     setState(() {
-      if (_questionIndex + 1 >= questions.length) {
-        _questionIndex = 0;
-        return;
-      }
-
       _questionIndex += 1;
     });
 
