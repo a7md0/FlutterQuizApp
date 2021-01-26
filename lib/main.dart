@@ -17,13 +17,24 @@ class _MyAppState extends State<MyApp> {
   final _questions = const [
     {
       'questionText': 'What\'s your favorite color?',
-      'answers': ['Black', 'Red', 'Green', 'White'],
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 6},
+        {'text': 'Green', 'score': 4},
+        {'text': 'White', 'score': 2},
+      ],
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ['Rabbit', 'Snake', 'Elephant', 'Lion'],
+      'answers': [
+        {'text': 'Rabbit', 'score': 3},
+        {'text': 'Snake', 'score': 21},
+        {'text': 'Elephant', 'score': 6},
+        {'text': 'Lion', 'score': 11},
+      ],
     },
   ];
+  var _totalScore = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +54,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
+    _totalScore += score;
     setState(() {
       _questionIndex += 1;
     });
